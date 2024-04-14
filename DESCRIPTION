@@ -1,0 +1,25 @@
+Package: abwellleaks
+Title: ABWellLeaks
+Version: 0.0.0.9000
+Authors@R: person('Luke', 'Talman', email = 'talman@ualberta.ca', role = c('cre', 'aut'))
+Description: Leaky well analyitcs tool.
+License: MIT + file LICENSE
+Imports: 
+    config (>= 0.3.2),
+    golem (>= 0.4.1),
+    magrittr,
+    shiny (>= 1.8.1.1),
+    dplyr,
+    leaflet,
+    sf,
+    DT,
+    tidyr,
+    stringr,
+    shinythemes,
+    htmltools
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
+Depends: 
+    R (>= 2.10)
+LazyDataCompression:xz
