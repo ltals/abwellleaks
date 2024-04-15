@@ -28,7 +28,9 @@ mod_mapsummaryAB_ui <- function(id){
                                          "750-1249.99" = "750-1249.99999",
                                          "1250-1999.99" = "1250-1999.99999",
                                          "2000+" = "2000-100000")),
-          shiny::checkboxInput(ns("seriousFilter"), "Show Only Serious Leaks", FALSE)
+          shiny::checkboxInput(ns("seriousFilter"), "Show Only Serious Leaks", FALSE),
+          shinyWidgets::switchInput(ns("satelliteToggle"), "Satellite View",
+                                    value = FALSE, onLabel = "On", offLabel = "Off")
         ),
 
         shiny::mainPanel(
@@ -54,6 +56,8 @@ mod_mapsummaryAB_ui <- function(id){
 mod_mapsummaryAB_server <- function(id, r){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+
+    KBE <- TotalDep <- classification <- DESCRIPTOR <- flow_rate_m3perday <- geometry <- LicenceIssueDate <- maxAge <- maxDepth <- meanDepth <- minAge <- minDepth <- reportType <- resolutionType <- Summary <- totalWells <- uwiB <- NULL
 
     summarized_data <- shiny::reactive({
 
@@ -126,12 +130,23 @@ mod_mapsummaryAB_server <- function(id, r){
       list(desc = summarizedDesc, prov = summarizedProv)
 
     })
+
+    tileType <- shiny::reactive({
+      if (input$satelliteToggle) {
+        "Esri.WorldImagery"
+      } else {
+        "OpenStreetMap.Mapnik"
+      }
+    })
+
     output$mapsummaryAB <- leaflet::renderLeaflet({
       summarizedDesc <- summarized_data()$desc
+      tileType <- tileType()
+
       pal <- leaflet::colorNumeric(palette = "YlOrRd", summarizedDesc$totalWells)
 
       leaflet::leaflet(data = summarizedDesc) %>%
-        leaflet::addTiles() %>%
+        leaflet::addProviderTiles(tileType) %>%
         leaflet::addPolygons(color = "#444444",
                              weight = 1,
                              smoothFactor = 0.5,
@@ -139,12 +154,15 @@ mod_mapsummaryAB_server <- function(id, r){
           fillOpacity = 0.5,
           popup = ~paste("Descriptor:", DESCRIPTOR,
                          "<br>Total Wells:", totalWells,
-                         "<br>Depth Range (M):", minDepth,"-", maxDepth,
-                         "<br>Mean Depth (M):", meanDepth,
+                         "<br>Depth Range (m):", minDepth,"-", maxDepth,
+                         "<br>Mean Depth (m):", meanDepth,
                          "<br>Licence Date Range:",
-                         minAge, "-", maxAge,
-                         "<br>Mean Flow Rate (M\u00B3):", meanFlowRateM3)
-        )
+                         minAge, "to", maxAge,
+                         "<br>Mean Flow Rate (m\u00B3):", meanFlowRateM3)) %>%
+        leaflet::addLegend(pal = pal, values = ~totalWells,
+                  title = "Total Wells",
+                  position = "bottomleft",
+                  opacity = 0.7)
     })
 
     output$provinceSummary <- DT::renderDataTable({
@@ -163,7 +181,7 @@ mod_mapsummaryAB_server <- function(id, r){
                     class = "display compact nowrap",
                     style = "bootstrap",
                     rownames = FALSE,
-                    caption = htmltools::tags$caption(style = "caption-side: top; font-size: 24px;", "Provincial Summary")  # Hide row names
+                    caption = htmltools::tags$caption(style = "caption-side: top; font-size: 24px;", "Provincial Summary")
       )
     })
   })

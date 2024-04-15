@@ -10,4 +10,5 @@ app_server <- function(input, output, session) {
   r$leakReport <- abwellleaks::leakReport
   mod_mapsummaryAB_server("mapsummaryAB_1", r = r)
   mod_mapwellsAB_server("mapwellsAB_1", r = r)
+  mod_plotwellsAB_server("plotwellsAB_1", r = r)
 }

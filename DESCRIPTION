@@ -16,10 +16,12 @@ Imports:
     tidyr,
     stringr,
     shinythemes,
-    htmltools
+    htmltools,
+    plotly,
+    shinyWidgets
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1
 Depends: 
     R (>= 2.10)
-LazyDataCompression:xz
+LazyDataCompression: xz

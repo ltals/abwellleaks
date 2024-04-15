@@ -28,7 +28,11 @@ mod_mapwellsAB_ui <- function(id){
                                          "750-1249.99" = "750-1249.99999",
                                          "1250-1999.99" = "1250-1999.99999",
                                          "2000+" = "2000-100000")),
-          shiny::checkboxInput(ns("seriousFilter"), "Show Only Serious Leaks", FALSE)
+          shiny::checkboxInput(ns("seriousFilter"), "Show Only Serious Leaks", FALSE),
+          shiny::textInput(ns("uwiInput"), "Search For Specific UWI:",
+                           value = "", placeholder = "##/##-##-###-##W#/#"),
+          shinyWidgets::switchInput(ns("satelliteToggle"), "Satellite View",
+                                    value = FALSE, onLabel = "On", offLabel = "Off")
         ),
 
         shiny::mainPanel(
@@ -50,6 +54,8 @@ mod_mapwellsAB_ui <- function(id){
 mod_mapwellsAB_server <- function(id, r){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+
+    debouncedUWI <- shiny::reactive(input$uwiInput) %>% shiny::debounce(1000)
 
     all_data <- shiny::reactive({
 
@@ -76,14 +82,29 @@ mod_mapwellsAB_server <- function(id, r){
           dplyr::filter(classification == 'Serious')
       }
 
+      if (nzchar(debouncedUWI()) && grepl("^\\d{2}/\\d{2}-\\d{2}-\\d{3}-\\d{2}W\\d{1}/\\d$", debouncedUWI())) {
+        data <- data %>%
+          dplyr::filter(uwiB == debouncedUWI())
+
+      }
+
       data
 
   })
 
+    tileType <- shiny::reactive({
+      if (input$satelliteToggle) {
+        "Esri.WorldImagery"
+      } else {
+        "OpenStreetMap.Mapnik"
+      }
+    })
+
   output$mapfiltAB <- leaflet::renderLeaflet({
     filtWells <- all_data()
+    tileType <- tileType()
     leaflet::leaflet(data = filtWells) %>%
-      leaflet::addTiles() %>%
+      leaflet::addProviderTiles(tileType) %>%
       leaflet::addCircleMarkers(
         lng = ~Longitude,
         lat = ~Latitude,
@@ -96,10 +117,10 @@ mod_mapwellsAB_server <- function(id, r){
                        "<br>Leak Reported:", report_date,
                        "<br>Leak Type:", type,
                        "<br>Classification:", classification,
-                       "<br>Daily Flow Rate M\u00B3:", flow_rate_m3perday,
+                       "<br>Daily Flow Rate (m\u00B3):", flow_rate_m3perday,
                        "<br>Reported Resolution:", reported_resolution,
                        "<br>Resolution Date", resolution_date,
-                       "<br>Total Vertical Depth (M):", TotalDep,
+                       "<br>Total Vertical Depth (m):", TotalDep,
                        "<br>Terminating Formation:", TerminatingFormation),
         group = 'markers',
         clusterOptions = leaflet::markerClusterOptions(

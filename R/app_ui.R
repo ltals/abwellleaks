@@ -15,6 +15,9 @@ app_ui <- function(request) {
                       ),
                       shiny::tabPanel("Map Wells",
                                       mod_mapwellsAB_ui("mapwellsAB_1")
+                      ),
+                      shiny::tabPanel("Plot Wells",
+                                      mod_plotwellsAB_ui("plotwellsAB_1")
                       )
     )
   )
