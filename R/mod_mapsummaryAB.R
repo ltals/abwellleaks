@@ -42,7 +42,7 @@ mod_mapsummaryAB_ui <- function(id){
                           DT::dataTableOutput(ns("provinceSummary"))
             )
           ),
-          tags$div(p("Created by: Luke Talman"), style = "text-align: center; margin-top: 20px;")
+          tags$div(p(""))
         )
       )
     )

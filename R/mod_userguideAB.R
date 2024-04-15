@@ -19,12 +19,24 @@ mod_userguideAB_ui <- function(id){
                         visulize the AER's Well Vent Flow/Gas Migration Report at a provincial
                         and well-specific level.The analyzed dataset is a merged dataset of the following
                         reports:"),
-                      # make a list
-
-                      p("AER Well Vent Flow/Gas Migration Report:"),
-                      p("AER ST37: List of Wells in Alberta Surface Holes:"),
-                      p("AER ST37: List of Wells in Alberta Bottom Holes:"),
-                      p("Pertrinex Well Infrastructure Report:"),
+                      shiny::tags$ul(
+                          shiny::tags$li(
+                            shiny::tags$a(href = "https://www1.aer.ca/productcatalogue/365.html",
+                                          "AER Well Vent Flow/Gas Migration Report")
+                          ),
+                          shiny::tags$li(
+                            shiny::tags$a(href = "https://www.aer.ca/providing-information/data-and-reports/statistical-reports/st37",
+                                          "AER ST37: List of Wells in Alberta Surface Holes")
+                          ),
+                          shiny::tags$li(
+                            shiny::tags$a(href = "https://www.aer.ca/providing-information/data-and-reports/statistical-reports/st37",
+                                          "AER ST37: List of Wells in Alberta Bottom Holes")
+                          ),
+                          shiny::tags$li(
+                            shiny::tags$a(href = "https://www.petrinex.ca/PD/Documents/PD_Well_Infrastructure_Report.pdf",
+                                          "Pertrinex Well Infrastructure Report")
+                          )
+                        ),
 
                       h4("Research Application"),
                       p("This tool supports research efforts surround the
@@ -39,12 +51,17 @@ mod_userguideAB_ui <- function(id){
                       p("The repository for this golem application can be forked with credit to
                         proprietary well leak data for further analysis."),
 
-                      #bold title
                       h4("Realestate Application"),
                       p("Existing or prospective landowners can use this tool to geolocate or
                         search for specfic wells on their land to see if they appear in the
                         AER's Well Vent Flow/Gas Migration Report. Landowners can further explore
-                        the nature of the leak, as well as the reolution of leak.")
+                        the nature of the leak, as well as the resolution of leak."),
+                      h4("Resolution Classification per AER Reported Resolution"),
+                      p("Repaired: Problem Repaired, Repaired - Scvf/Gm, Well Abandoned,
+                        Not Converted, Wellhead Seal Leak, Casing Failure, Died Out"),
+                      p("Abated: Monitor As Required, Considered Non-Serious, Well Capped W/ Pressure"),
+                      p("Repair Unsuccessful: Repair Unsuccessful")
+
                     )
       ),
       shiny::column(12,
@@ -71,14 +88,11 @@ mod_userguideAB_ui <- function(id){
       ),
       shiny::column(12,
                     shiny::wellPanel(
-                      h3("Leak Report: By Well"),
-                      p("Explore additional features such as toggling between satellite view and regular view.")
-                    )
-      ),
-      shiny::column(12,
-                    shiny::wellPanel(
                       h3("Questions/Bugs/Concerns"),
-                      p("Reach out to talman@ualberta with any bug reports or questions.")
+                      p("Reach out to ",
+                        shiny::tags$a(href = "mailto:talman@ualberta", "talman@ualberta"),
+                        " with bug reports, comments, or questions."
+                      )
                     ))
     )
   )

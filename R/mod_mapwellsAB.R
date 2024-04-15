@@ -32,11 +32,7 @@ mod_mapwellsAB_ui <- function(id){
           shiny::textInput(ns("uwiInput"), "Search For Specific UWI:",
                            value = "", placeholder = "##/##-##-###-##W#/#"),
           shinyWidgets::switchInput(ns("satelliteToggle"), "Satellite View",
-                                    value = FALSE, onLabel = "On", offLabel = "Off"),
-          shiny::tags$div(
-            shiny::tags$p("Instructions:"),
-            style = "margin-top: 20px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;"
-          )
+                                    value = FALSE, onLabel = "On", offLabel = "Off")
         ),
 
         shiny::mainPanel(
@@ -45,7 +41,7 @@ mod_mapwellsAB_ui <- function(id){
                           leaflet::leafletOutput(ns("mapfiltAB"), height = "600px")
             )
           ),
-          tags$div(p("Created by: Luke Talman"), style = "text-align: center; margin-top: 20px;")
+          tags$div(p(""))
         )
       )
     )
