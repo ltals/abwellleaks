@@ -23,6 +23,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./deploy
+          context: .
           push: true
           tags: ghcr.io/ltals/abwellleaks/myimage:latest
