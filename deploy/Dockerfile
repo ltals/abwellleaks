@@ -1,4 +1,4 @@
-FROM abwellleaks
+FROM abwellleaks_base
 COPY renv.lock.prod renv.lock
 RUN R -e 'renv::restore()'
 COPY abwellleaks_*.tar.gz /app.tar.gz
