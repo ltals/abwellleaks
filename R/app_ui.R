@@ -9,7 +9,7 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    shiny::navbarPage(title = "Well Leaks Dashboard", id = "main_navbar",
+    shiny::navbarPage(title = "Alberta Well Leak Report", id = "main_navbar",
                       shiny::tabPanel("Map Summary",
                                       mod_mapsummaryAB_ui("mapsummaryAB_1")
                       ),
@@ -18,6 +18,9 @@ app_ui <- function(request) {
                       ),
                       shiny::tabPanel("Plot Wells",
                                       mod_plotwellsAB_ui("plotwellsAB_1")
+                      ),
+                      shiny::tabPanel("User Guide",
+                                      mod_userguideAB_ui("userguideAB_1")
                       )
     )
   )

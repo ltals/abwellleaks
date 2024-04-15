@@ -12,7 +12,7 @@ mod_plotwellsAB_ui <- function(id){
   tagList(
     shiny::fluidPage(
       theme = shinythemes::shinytheme("flatly"),
-      shiny::titlePanel(h1("Leak Report Plots")),
+      shiny::titlePanel(h1("Leak Report: Plots")),
 
     shiny::selectInput(ns("xInput"), "Select X Variable:",
                 choices = c("Stabilized Shut-In Pressure (kPa)" = "stabilized_shut_in_pressure_kpa",

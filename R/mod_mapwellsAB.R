@@ -12,7 +12,7 @@ mod_mapwellsAB_ui <- function(id){
   tagList(
     shiny::fluidPage(
       theme = shinythemes::shinytheme("flatly"),
-      shiny::titlePanel(h1("Filtered Well Leaks Map"), windowTitle = "Filtered Well Leaks by Descriptor"),
+      shiny::titlePanel(h1("Leak Report: By Well"), windowTitle = "Well-Level"),
 
       shiny::sidebarLayout(
         shiny::sidebarPanel(

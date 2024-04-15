@@ -23,6 +23,7 @@ attachment::att_amend_desc()
 golem::add_module(name = "mapsummaryAB") # Name of the module
 golem::add_module(name = "mapwellsAB")
 golem::add_module(name = "plotwellsAB")
+golem::add_module(name = "userguideAB")
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*

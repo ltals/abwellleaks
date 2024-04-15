@@ -12,7 +12,7 @@ mod_mapsummaryAB_ui <- function(id){
   tagList(
     shiny::fluidPage(
       theme = shinythemes::shinytheme("flatly"),
-      shiny::titlePanel(h1("Well Leaks Summary"), windowTitle = "Well Leaks Summary by Descriptor"),
+      shiny::titlePanel(h1("Leak Report: By Township & Range"), windowTitle = "Township & Range-Level"),
 
       shiny::sidebarLayout(
         shiny::sidebarPanel(
