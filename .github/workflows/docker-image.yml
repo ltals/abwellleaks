@@ -1,28 +1,18 @@
-name: Build and Push Docker Image
+name: Docker Image CI
 
 on:
   push:
-    branches:
-      - main  
-      
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
 jobs:
-  build-and-push:
+
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }} # Ensure this secret is set in your repo settings
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./deploy
-          push: true
-          tags: ghcr.io/ltals/abwellleaks/myimage:latest
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build ./deploy --file Dockerfile --tag my-image-name:$(date +%s)
