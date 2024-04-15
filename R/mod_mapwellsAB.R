@@ -23,7 +23,7 @@ mod_mapwellsAB_ui <- function(id){
             shiny::selectInput(ns("resTypeInput"), "Resolution Type:",
                                choices = c("All", "Repaired", "Abated", "Repair Unsuccessful"))
           ),
-          shiny::selectInput(ns("depthRangeInput"), "Total Vertical Depth (Metres):",
+          shiny::selectInput(ns("depthRangeInput"), "Total Vertical Depth (m):",
                              choices = c("All", "0-749.99" = '0-749.999999',
                                          "750-1249.99" = "750-1249.99999",
                                          "1250-1999.99" = "1250-1999.99999",
@@ -32,7 +32,11 @@ mod_mapwellsAB_ui <- function(id){
           shiny::textInput(ns("uwiInput"), "Search For Specific UWI:",
                            value = "", placeholder = "##/##-##-###-##W#/#"),
           shinyWidgets::switchInput(ns("satelliteToggle"), "Satellite View",
-                                    value = FALSE, onLabel = "On", offLabel = "Off")
+                                    value = FALSE, onLabel = "On", offLabel = "Off"),
+          shiny::tags$div(
+            shiny::tags$p("Instructions:"),
+            style = "margin-top: 20px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;"
+          )
         ),
 
         shiny::mainPanel(

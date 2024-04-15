@@ -23,7 +23,7 @@ mod_mapsummaryAB_ui <- function(id){
             shiny::selectInput(ns("resTypeInput"), "Resolution Type:",
                                choices = c("All", "Repaired", "Abated", "Repair Unsuccessful"))
           ),
-          shiny::selectInput(ns("depthRangeInput"), "Total Vertical Depth (Metres):",
+          shiny::selectInput(ns("depthRangeInput"), "Total Vertical Depth (m):",
                              choices = c("All", "0-749.99"= '0-749.999999',
                                          "750-1249.99" = "750-1249.99999",
                                          "1250-1999.99" = "1250-1999.99999",
