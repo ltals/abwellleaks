@@ -17,7 +17,7 @@ mod_userguideAB_ui <- function(id){
                       h3("Alberta Well Leaks Dashboard"),
                       p("The Alberta Well Leaks Dashboard serves as a platform to anaylsis and
                         visulize the AER's Well Vent Flow/Gas Migration Report at a provincial
-                        and well-specific level.The analyzed dataset is a merged dataset of the following
+                        and well-specific level. The analyzed dataset is a merged dataset of the following
                         reports:"),
                       shiny::tags$ul(
                           shiny::tags$li(
@@ -48,7 +48,7 @@ mod_userguideAB_ui <- function(id){
                         at a province-wide level, while satallite imagery supports in the detection
                         of leaks at a well-specific level through killzone analysis."),
 
-                      p("The repository for this golem application can be forked with credit to
+                      p("The repository for this golem application can be forked and built upon to include
                         proprietary well leak data for further analysis."),
 
                       h4("Realestate Application"),
@@ -84,6 +84,14 @@ mod_userguideAB_ui <- function(id){
                         about the specific well sourced from the merged dataset."),
                       p("Wells are searchable by UWI; enter your UWI in the required
                         format and it will appear on map if it's present in the leak report.")
+                    )
+      ),
+      shiny::column(12,
+                    shiny::wellPanel(
+                      h3("Leak Report: Plots"),
+                      p("Visulize and explore relationships in the Leak Report dataset."),
+                      p("Generated plots can be saved locally using the plot toolbar in the
+                        top right corner of your plot.")
                     )
       ),
       shiny::column(12,
