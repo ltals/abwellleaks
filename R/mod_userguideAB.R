@@ -14,8 +14,8 @@ mod_userguideAB_ui <- function(id){
     shiny::fluidRow(
       shiny::column(12,
                     shiny::wellPanel(
-                      h3("Alberta Well Leaks Dashboard"),
-                      p("The Alberta Well Leaks Dashboard serves as a platform to anaylsis and
+                      h3("Alberta Well Leak Report Dashboard"),
+                      p("The Alberta Well Leak Report Dashboard serves as a platform to anaylze and
                         visulize the AER's Well Vent Flow/Gas Migration Report at a provincial
                         and well-specific level. The analyzed dataset is a merged dataset of the following
                         reports:"),
@@ -41,7 +41,7 @@ mod_userguideAB_ui <- function(id){
                       h4("Research Application"),
                       p("This tool supports research efforts surround the
                         detection, repair and prevention of well leaks in Alberta,
-                        serving as consildated data source for publically available well data.
+                        serving as consildated data source for publically available well leak data.
                         Leaking wells have a high cost to well owners and the public."),
 
                       p("Geospacial components support the communication and framing of the problem
@@ -70,8 +70,8 @@ mod_userguideAB_ui <- function(id){
                       p("Filter data in the Well Leak Report by report type (existince of a reported resolution),
                         resolution type, total vertical of the wells, and severity of the leak.
                         Data based on your selected filters will be agregated by Township and Range and displayed on the map.
-                        Click on a specific Township and Range to see the computed summary for that given area. The Provincial summary provides the
-                        same summary given the filters applied at a Province-wide level."),
+                        Click on a specific Township and Range to see the computed summary for that given area. The provincial summary provides the
+                        same summary given the filters applied at a province-wide level."),
                       p("Toggle between satellite view and regular
                         when browsing the map.")
                     )
@@ -80,8 +80,8 @@ mod_userguideAB_ui <- function(id){
                     shiny::wellPanel(
                       h3("Leak Report: By Well"),
                       p("Using the same filters as the previous tab, filter and view
-                        the Well Leak Report at a well specific level. Click on as specific well to see key information
-                        about the specific well sourced from the merged dataset."),
+                        the Well Leak Report at a well-specific level. Click on a specific well to see key information
+                        sourced from the merged dataset."),
                       p("Wells are searchable by UWI; enter your UWI in the required
                         format and it will appear on map if it's present in the leak report.")
                     )

@@ -57,7 +57,7 @@ mod_mapsummaryAB_server <- function(id, r){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    KBE <- TotalDep <- classification <- DESCRIPTOR <- flow_rate_m3perday <- geometry <- LicenceIssueDate <- maxAge <- maxDepth <- meanDepth <- minAge <- minDepth <- reportType <- resolutionType <- Summary <- totalWells <- uwiB <- NULL
+    # KBE <- TotalDep <- classification <- DESCRIPTOR <- flow_rate_m3perday <- geometry <- LicenceIssueDate <- maxAge <- maxDepth <- meanDepth <- minAge <- minDepth <- reportType <- resolutionType <- Summary <- totalWells <- uwiB <- NULL
 
     summarized_data <- shiny::reactive({
 
@@ -113,9 +113,9 @@ mod_mapsummaryAB_server <- function(id, r){
           .groups = "drop"
         ) %>%
         dplyr::mutate(Summary = "Province Wide") %>%
-        dplyr::rename(`Mean Depth (M)` = meanDepth,
-                      `Min Depth (M)` = minDepth,
-                      `Max Depth (M)` = maxDepth,
+        dplyr::rename(`Mean Depth (m)` = meanDepth,
+                      `Min Depth (m)` = minDepth,
+                      `Max Depth (m)` = maxDepth,
                       `Min Age` = minAge,
                       `Max Age` = maxAge,
                       `Total Wells` = totalWells) %>%
@@ -123,7 +123,7 @@ mod_mapsummaryAB_server <- function(id, r){
         tidyr::pivot_longer(names_to = "Variable", values_to = "Value", -Summary) %>%
         dplyr::select(-Summary) %>%
         dplyr::mutate(Variable = dplyr::case_when(
-          Variable == "meanFlowRateM3" ~ "Mean Flow Rate (M\u00B3)",
+          Variable == "meanFlowRateM3" ~ "Mean Flow Rate (m\u00B3)",
           TRUE ~ Variable
         ))
 

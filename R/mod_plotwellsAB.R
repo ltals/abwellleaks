@@ -31,7 +31,7 @@ mod_plotwellsAB_ui <- function(id){
     shiny::selectInput(ns("groupBy"), "Group By:",
                        choices = c("Leak Type" = "type",
                                    "Well Substance" = "WellSubstance",
-                                   "Classification" = "classification")),
+                                   "Severity Classification" = "classification")),
     plotly::plotlyOutput(ns("meanResolutionPlot"), height = "300px")
     )
   )
