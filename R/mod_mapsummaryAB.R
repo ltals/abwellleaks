@@ -99,7 +99,8 @@ mod_mapsummaryAB_server <- function(id, r){
           geometry = dplyr::first(geometry),
           .groups = "drop"
         ) %>%
-        sf::st_as_sf()
+        sf::st_as_sf() %>%
+        sf::st_transform(crs = 4326)
 
       summarizedProv <- data %>%
         dplyr::summarise(
