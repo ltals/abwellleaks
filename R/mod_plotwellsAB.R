@@ -53,6 +53,7 @@ mod_plotwellsAB_server <- function(id, r){
       plotly::plot_ly(data, x = ~get(input$xInput),
               y = ~flow_rate_m3perday,
               color = ~type,
+              colors = c('darkred', 'steelblue', 'orange'),
               type = 'scatter',
               mode = 'markers') %>%
         plotly::layout(xaxis = list(title = ""),
