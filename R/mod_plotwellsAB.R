@@ -27,10 +27,10 @@ mod_plotwellsAB_ui <- function(id){
                        min = 5, max = 20, value = 10),
     plotly::plotlyOutput(ns("formationPlot"), height = "300px"),
 
-    h3("Mean Resolution Times"),
+    h3("Mean Report Resolution Times"),
     shiny::selectInput(ns("groupBy"), "Group By:",
                        choices = c("Leak Type" = "type",
-                                   "Well Substance" = "WellSubstance",
+                                   "Reported Resolution" = "reported_resolution",
                                    "Severity Classification" = "classification")),
     plotly::plotlyOutput(ns("meanResolutionPlot"), height = "300px")
     )
@@ -53,7 +53,7 @@ mod_plotwellsAB_server <- function(id, r){
       plotly::plot_ly(data, x = ~get(input$xInput),
               y = ~flow_rate_m3perday,
               color = ~type,
-              colors = c('darkred', 'steelblue', 'orange'),
+              colors = c('darkred', 'steelblue', 'darkorange'),
               type = 'scatter',
               mode = 'markers') %>%
         plotly::layout(xaxis = list(title = ""),
@@ -72,7 +72,7 @@ mod_plotwellsAB_server <- function(id, r){
         dplyr::arrange(TerminatingFormation)
 
       plotly::plot_ly(data, x = ~TerminatingFormation, y = ~n, type = 'bar',
-                      marker = list(color = 'orange')) %>%
+                      marker = list(color = 'darkorange')) %>%
         plotly::layout(xaxis = list(title = "", tickangle = 45),
                        yaxis = list(title = "Count of Wells"))
     })
