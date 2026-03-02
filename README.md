@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The Alberta Well Leaks Dashboard serves as a platform to anaylsis and
+The Alberta Well Leaks Dashboard serves as a platform to analyze and
 visulize the AER’s Well Vent Flow/Gas Migration Report at a provincial
 and well-specific level.
 
